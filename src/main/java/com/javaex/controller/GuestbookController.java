@@ -2,6 +2,7 @@ package com.javaex.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +16,7 @@ import com.javaex.vo.GuestVo;
 @RequestMapping("/guestbook")
 public class GuestbookController {
 	
-	private BookDao dao = new BookDao();
+	@Autowired BookDao dao;
 	
 	@RequestMapping("/main")
 	public String main(Model model) {
@@ -25,7 +26,7 @@ public class GuestbookController {
 
 		model.addAttribute("guestlist", gList);
 
-		return "/WEB-INF/views/main.jsp";
+		return "main";
 	}
 	
 	@RequestMapping("/insert")
@@ -33,7 +34,7 @@ public class GuestbookController {
 		System.out.println("/guestbook/insert");
 		
 		dao.insert(guestVo);
-		System.out.println(guestVo.toString());
+		//System.out.println(guestVo.toString());
 		
 		return "redirect: /guestbook3/guestbook/main";
 	}
@@ -44,7 +45,7 @@ public class GuestbookController {
 		
 		model.addAttribute("no", no);
 		
-		return "/WEB-INF/views/deleteForm.jsp";
+		return "deleteForm";
 	}
 	
 	@RequestMapping("/delete")
@@ -54,6 +55,4 @@ public class GuestbookController {
 		
 		return "redirect: /guestbook3/guestbook/main";
 	}
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-
 }
